@@ -95,15 +95,6 @@ SentinelCam/
 *   **Python Version:** Python 3.11 or 3.12 is recommended.
 *   **Telegram API Access:** Ensure `api.telegram.org` is accessible from your network. It might be blocked in some countries (e.g., as noted, Nepal).
 
-## 🧠 What Can Be Added
-
-*   Integration with a physical lock.
-*   Web interface for management.
-*   Face mask detection.
-*   Enhanced anti-spoofing (e.g., blink detection).
-*   Snapshot saving based on events.
-*   And much more...
-
 ## 📄 License
 
 This project is unlicensed. The source code/models for `insightface` and `face_recognition_models` might be under separate licenses (see their repositories).
