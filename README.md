@@ -75,7 +75,6 @@
 SentinelCam/
 
 ├── dataset/                 # Папка с фото для распознавания
-
 │   ├── Person1.jpg
 
 │   └── ...
