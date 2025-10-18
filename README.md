@@ -32,6 +32,7 @@
     ```bash
     python3 -m venv venv
     source venv/bin/activate  # Linux/Mac
+    source venv/bin/activate.fish # Fish terminal
     # or
     # venv\Scripts\activate # Windows
     ```
