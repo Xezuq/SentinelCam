@@ -1,2 +1,72 @@
 # SentinelCam
-A Python-based application utilizing InsightFace for fast, GPU-accelerated face recognition. Features include dynamic access control based on user lists and time schedules, detection of emotions and gender, real-time visualization, logging, and customizable Telegram notifications for unrecognized or denied access events.
+
+**SentinelCam** — это приложение на Python для **распознавания лиц в реальном времени** с использованием `insightface` (с ускорением на GPU), анализа **эмоций и пола** с помощью `deepface`, **контроля доступа** на основе белого списка и расписания, а также **уведомлений в Telegram** при обнаружении неавторизованных лиц (включая фото).
+
+## 🚀 Функции
+
+*   **Распознавание лиц:** Быстро и точно определяет лица на видео с камеры, используя мощную модель `insightface`.
+*   **GPU Ускорение:** Использует `insightface` с поддержкой GPU для высокой производительности.
+*   **Анализ атрибутов:** Определяет **эмоцию** и **пол** распознанного лица.
+*   **Гибкий контроль доступа:**
+    *   Сравнивает распознанное имя с **белым списком** из `config.json`.
+    *   Проверяет **временные рамки доступа**, заданные для каждого пользователя.
+    *   Поддержка **уровней доступа** (`admin`, `user`, `guest`, `denied`) с настраиваемыми правами.
+*   **Отображение информации:**
+    *   Показывает имя, эмоцию и **уровень доступа** поверх лица на видео.
+    *   Изменяет цвет рамки (зелёная — доступ разрешён, красная — доступ запрещён).
+*   **Логирование:** Сохраняет все события (имя, эмоция, пол, уровень доступа, статус, причина) в файл `recognition_log.csv`.
+*   **Уведомления в Telegram:**
+    *   Отправляет **фото** и **детали** события (имя, уровень доступа, статус, причина, эмоция, пол) в Telegram-чат при обнаружении неавторизованного лица или лица из белого списка с настройкой `send_alert: true`.
+*   **Конфигурирование:** Управление пользователями, уровнями доступа и временными рамками через `config.json`.
+
+## 🛠️ Установка и запуск
+
+1.  **Клонируйте репозиторий:**
+    ```bash
+    git clone https://github.com/your-username/SentinelCam.git
+    cd SentinelCam
+    ```
+
+2.  **Создайте и активируйте виртуальное окружение (рекомендуется):**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # Linux/Mac
+    # или
+    # venv\Scripts\activate # Windows
+    ```
+
+3.  **Установите зависимости:**
+    Убедитесь, что у вас **Python 3.11 или 3.12** (библиотеки типа `face_recognition`, `insightface`, `tensorflow` могут не поддерживать Python 3.13).
+    ```bash
+    pip install insightface onnxruntime-gpu opencv-python numpy deepface requests
+    # или установите из requirements.txt, если он есть
+    # pip install -r requirements.txt
+    ```
+
+4.  **Установите зависимости для GUI OpenCV (если возникает ошибка при отображении окна):**
+    ```bash
+    pip install opencv-python
+    # или, если вышеуказанная команда не помогает, установите системные зависимости:
+    # sudo apt install libgtk-3-dev pkg-config (для Ubuntu/Debian)
+    ```
+
+5.  **Настройте Telegram-бота:**
+    *   Создайте бота через [@BotFather](https://t.me/BotFather) в Telegram.
+    *   Получите **токен бота** (например, `123456789:ABCdefGHIjklMNOpqrSTUvwxYZ`).
+    *   Напишите боту в чат (например, `/start`).
+    *   Найдите свой **ID чата** (например, через `https://api.telegram.org/bot<TOKEN>/getUpdates` после сообщения боту).
+
+6.  **Настройте `config.json`:**
+    *   Отредактируйте файл `config.json`, добавив имена пользователей, их уровни доступа и временные рамки.
+
+7.  **Поместите фото в `dataset/`:**
+    *   Положите фотографии лиц, которые система должна распознавать, в папку `dataset/`. Имя файла (без суффикса `_1` и т.д.) будет использоваться как имя человека (например, `Alice.jpg` -> `Alice`).
+
+8.  **Запустите приложение:**
+    *   Замените `YOUR_BOT_TOKEN_HERE` и `YOUR_CHAT_ID_HERE` в коде (`main.py`) на **ваш токен** и **ID чата**.
+    *   Запустите скрипт:
+        ```bash
+        python main.py
+        ```
+
+## 📁 Структура проекта
